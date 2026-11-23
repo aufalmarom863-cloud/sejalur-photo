@@ -294,6 +294,16 @@ function Icon({
   );
 }
 
+function getAssetUrl(path: string) {
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  const base = import.meta.env.BASE_URL || "/";
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  return `${cleanBase}${cleanPath}`;
+}
+
 function Photo({
   src,
   alt,
@@ -306,6 +316,8 @@ function Photo({
   eager?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
+  const resolvedSrc = getAssetUrl(src);
+
   if (failed) {
     return (
       <div
@@ -323,7 +335,7 @@ function Photo({
   }
   return (
     <img
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       className={className}
       onError={() => setFailed(true)}

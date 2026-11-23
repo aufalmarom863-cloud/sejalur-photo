@@ -1,0 +1,10 @@
+{
+  "description": "A website built around the provided template, offering visitors a clear, polished way to explore its content and services.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
